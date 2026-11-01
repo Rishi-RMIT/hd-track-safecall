@@ -5,9 +5,7 @@
       "findings": [
         {
           "version": "6.15.3",
-          "paths": [
-            "backend>supertest>superagent>qs"
-          ]
+          "paths": ["backend>supertest>superagent>qs"]
         }
       ],
       "found_by": null,
@@ -20,9 +18,7 @@
       "reported_by": null,
       "title": "qs array-limit bypass via bracket-key comma parsing",
       "metadata": null,
-      "cves": [
-        "CVE-2026-82562"
-      ],
+      "cves": ["CVE-2026-82562"],
       "access": "public",
       "severity": "moderate",
       "module_name": "qs",
@@ -35,18 +31,14 @@
         "score": 3.7,
         "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L"
       },
-      "cwe": [
-        "CWE-770"
-      ],
+      "cwe": ["CWE-770"],
       "url": "https://github.com/advisories/GHSA-x5fp-wj9c-mxmx"
     },
     "1158507": {
       "findings": [
         {
           "version": "6.15.3",
-          "paths": [
-            "backend>supertest>superagent>qs"
-          ]
+          "paths": ["backend>supertest>superagent>qs"]
         }
       ],
       "found_by": null,
@@ -59,9 +51,7 @@
       "reported_by": null,
       "title": "qs: Denial of Service via Attacker Controlled isBuffer",
       "metadata": null,
-      "cves": [
-        "CVE-2026-82417"
-      ],
+      "cves": ["CVE-2026-82417"],
       "access": "public",
       "severity": "moderate",
       "module_name": "qs",
@@ -74,19 +64,14 @@
         "score": 5.3,
         "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
       },
-      "cwe": [
-        "CWE-248",
-        "CWE-703"
-      ],
+      "cwe": ["CWE-248", "CWE-703"],
       "url": "https://github.com/advisories/GHSA-4mjr-xmp4-gh2g"
     },
     "1239948": {
       "findings": [
         {
           "version": "10.3.1",
-          "paths": [
-            "backend>express-rate-limit>ip-address"
-          ]
+          "paths": ["backend>express-rate-limit>ip-address"]
         }
       ],
       "found_by": null,
@@ -99,9 +84,7 @@
       "reported_by": null,
       "title": "ip-address: Address6.isLinkLocal() recognizes fe80::/64 rather than fe80::/10, allowing SSRF and trust-boundary bypass to on-link hosts",
       "metadata": null,
-      "cves": [
-        "CVE-2026-101913"
-      ],
+      "cves": ["CVE-2026-101913"],
       "access": "public",
       "severity": "moderate",
       "module_name": "ip-address",
@@ -114,19 +97,14 @@
         "score": 0,
         "vectorString": null
       },
-      "cwe": [
-        "CWE-697",
-        "CWE-918"
-      ],
+      "cwe": ["CWE-697", "CWE-918"],
       "url": "https://github.com/advisories/GHSA-rpw4-54j3-4h4q"
     },
     "1239949": {
       "findings": [
         {
           "version": "10.3.1",
-          "paths": [
-            "backend>express-rate-limit>ip-address"
-          ]
+          "paths": ["backend>express-rate-limit>ip-address"]
         }
       ],
       "found_by": null,
@@ -139,9 +117,7 @@
       "reported_by": null,
       "title": "ip-address: no classifier recognizes the NAT64 local-use range 64:ff9b:1::/48, allowing SSRF and trust-boundary bypass",
       "metadata": null,
-      "cves": [
-        "CVE-2026-101910"
-      ],
+      "cves": ["CVE-2026-101910"],
       "access": "public",
       "severity": "moderate",
       "module_name": "ip-address",
@@ -154,18 +130,14 @@
         "score": 0,
         "vectorString": null
       },
-      "cwe": [
-        "CWE-918"
-      ],
+      "cwe": ["CWE-918"],
       "url": "https://github.com/advisories/GHSA-2vr4-cq9g-pvrc"
     },
     "1240097": {
       "findings": [
         {
           "version": "10.3.1",
-          "paths": [
-            "backend>express-rate-limit>ip-address"
-          ]
+          "paths": ["backend>express-rate-limit>ip-address"]
         }
       ],
       "found_by": null,
@@ -178,9 +150,7 @@
       "reported_by": null,
       "title": "ip-address: isInSubnet() and isHostInSubnet() compare addresses of different families as if they shared an address space, allowing an allowlist check to admit an address outside its range",
       "metadata": null,
-      "cves": [
-        "CVE-2026-101912"
-      ],
+      "cves": ["CVE-2026-101912"],
       "access": "public",
       "severity": "moderate",
       "module_name": "ip-address",
@@ -193,19 +163,14 @@
         "score": 0,
         "vectorString": null
       },
-      "cwe": [
-        "CWE-697",
-        "CWE-843"
-      ],
+      "cwe": ["CWE-697", "CWE-843"],
       "url": "https://github.com/advisories/GHSA-j6r3-76f7-8jcv"
     },
     "1240098": {
       "findings": [
         {
           "version": "10.3.1",
-          "paths": [
-            "backend>express-rate-limit>ip-address"
-          ]
+          "paths": ["backend>express-rate-limit>ip-address"]
         }
       ],
       "found_by": null,
@@ -218,9 +183,7 @@
       "reported_by": null,
       "title": "ip-address: Address6 builds a parse diagnostic proportional to the input with no length bound, allowing a single long string to stall or crash the process",
       "metadata": null,
-      "cves": [
-        "CVE-2026-101911"
-      ],
+      "cves": ["CVE-2026-101911"],
       "access": "public",
       "severity": "moderate",
       "module_name": "ip-address",
@@ -233,19 +196,14 @@
         "score": 0,
         "vectorString": null
       },
-      "cwe": [
-        "CWE-400",
-        "CWE-770"
-      ],
+      "cwe": ["CWE-400", "CWE-770"],
       "url": "https://github.com/advisories/GHSA-h3mg-xc3c-68pw"
     },
     "1242883": {
       "findings": [
         {
           "version": "10.3.1",
-          "paths": [
-            "backend>express-rate-limit>ip-address"
-          ]
+          "paths": ["backend>express-rate-limit>ip-address"]
         }
       ],
       "found_by": null,
@@ -258,9 +216,7 @@
       "reported_by": null,
       "title": "ip-address: Address6 matches a zone identifier in quadratic time ahead of its length limit, allowing a single long string to stall the process",
       "metadata": null,
-      "cves": [
-        "CVE-2026-111997"
-      ],
+      "cves": ["CVE-2026-111997"],
       "access": "public",
       "severity": "moderate",
       "module_name": "ip-address",
@@ -273,18 +229,14 @@
         "score": 0,
         "vectorString": null
       },
-      "cwe": [
-        "CWE-1333"
-      ],
+      "cwe": ["CWE-1333"],
       "url": "https://github.com/advisories/GHSA-rxp7-6hxx-x8q5"
     },
     "1243687": {
       "findings": [
         {
           "version": "6.15.3",
-          "paths": [
-            "backend>supertest>superagent>qs"
-          ]
+          "paths": ["backend>supertest>superagent>qs"]
         }
       ],
       "found_by": null,
@@ -297,9 +249,7 @@
       "reported_by": null,
       "title": "qs : qs.stringify with arrayFormat 'comma' throws an uncaught TypeError on array elements carrying a non-callable own toString (DoS)",
       "metadata": null,
-      "cves": [
-        "CVE-2026-110816"
-      ],
+      "cves": ["CVE-2026-110816"],
       "access": "public",
       "severity": "moderate",
       "module_name": "qs",
@@ -312,10 +262,7 @@
         "score": 5.3,
         "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
       },
-      "cwe": [
-        "CWE-248",
-        "CWE-704"
-      ],
+      "cwe": ["CWE-248", "CWE-704"],
       "url": "https://github.com/advisories/GHSA-6pq8-jhm2-2vcw"
     },
     "1244012": {
@@ -328,9 +275,7 @@
         },
         {
           "version": "3.1.5",
-          "paths": [
-            "backend>eslint>minimatch"
-          ]
+          "paths": ["backend>eslint>minimatch"]
         },
         {
           "version": "9.0.9",
@@ -349,9 +294,7 @@
       "reported_by": null,
       "title": "minimatch has potential denial of service via globparts amplification",
       "metadata": null,
-      "cves": [
-        "CVE-2026-118764"
-      ],
+      "cves": ["CVE-2026-118764"],
       "access": "public",
       "severity": "moderate",
       "module_name": "minimatch",
@@ -364,9 +307,7 @@
         "score": 0,
         "vectorString": null
       },
-      "cwe": [
-        "CWE-405"
-      ],
+      "cwe": ["CWE-405"],
       "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249"
     },
     "1244013": {
@@ -388,9 +329,7 @@
       "reported_by": null,
       "title": "Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal",
       "metadata": null,
-      "cves": [
-        "CVE-2026-118773"
-      ],
+      "cves": ["CVE-2026-118773"],
       "access": "public",
       "severity": "moderate",
       "module_name": "glob",
@@ -403,9 +342,7 @@
         "score": 0,
         "vectorString": null
       },
-      "cwe": [
-        "CWE-400"
-      ],
+      "cwe": ["CWE-400"],
       "url": "https://github.com/advisories/GHSA-3g3m-2fjr-6pw4"
     }
   },

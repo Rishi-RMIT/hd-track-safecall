@@ -27,15 +27,15 @@ Out of scope: acknowledgement/action lifecycle, changes to team services, real T
 
 ## Qualification checklist
 
-| Requirement | Planned implementation | Status |
-|---|---|---|
-| Real client inspiration | SafeCall duty coordinator, repeated manual triage and defensible next action | Brief-linked proposal |
-| Genuine extension | Authored persistent investigation notes; does not reimplement escalation stage buttons | Inspected-team evidence above |
-| Interactive UI | Open sample case, enter and save note, inspect retained history | Not built |
-| Two collections read and write | `followUpCases`: create/read case and update note summary; `followUpNotes`: create/read notes | Not built |
-| Substantial server-enforced rules | Auth/owner checks, exact field/type/length validation, immutable author/context, timestamp checks, and cross-document `getAfter` consistency requiring atomic note + case-summary change | Not built or verified |
-| No charges | Auth + two Firestore collections on Spark, Next SSR host on an eligible free plan | Firebase Spark verified; Vercel pending |
-| Original boilerplate | Existing Next.js/Firebase shell, auth, typed helpers, validation conventions | Fork/provenance verified |
+| Requirement                       | Planned implementation                                                                                                                                                                   | Status                                  |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Real client inspiration           | SafeCall duty coordinator, repeated manual triage and defensible next action                                                                                                             | Brief-linked proposal                   |
+| Genuine extension                 | Authored persistent investigation notes; does not reimplement escalation stage buttons                                                                                                   | Inspected-team evidence above           |
+| Interactive UI                    | Open sample case, enter and save note, inspect retained history                                                                                                                          | Not built                               |
+| Two collections read and write    | `followUpCases`: create/read case and update note summary; `followUpNotes`: create/read notes                                                                                            | Not built                               |
+| Substantial server-enforced rules | Auth/owner checks, exact field/type/length validation, immutable author/context, timestamp checks, and cross-document `getAfter` consistency requiring atomic note + case-summary change | Not built or verified                   |
+| No charges                        | Auth + two Firestore collections on Spark, Next SSR host on an eligible free plan                                                                                                        | Firebase Spark verified; Vercel pending |
+| Original boilerplate              | Existing Next.js/Firebase shell, auth, typed helpers, validation conventions                                                                                                             | Fork/provenance verified                |
 
 ## Formal use case UC-01
 
@@ -46,6 +46,7 @@ Trigger: the coordinator wants to retain follow-up reasoning for a silent-pendan
 Preconditions: verified email/password account, valid session, matching authenticated Firebase client, deployed feature rules; the case is owned by this user or is initialized through the explicit sample-case action.
 
 Main flow:
+
 1. Open the notebook. If no owned sample case exists, choose Create sample case; the system persists and displays its labelled synthetic context.
 2. Read the case identity/context and existing note history from the two collections.
 3. Enter plain-text follow-up reasoning and choose Save.
@@ -67,18 +68,17 @@ Out of scope: the exclusions above. No operational action is executed and notes 
 
 ## Acceptance criteria and planned tests
 
-| AC | Observable requirement | UC steps | Planned test and evidence |
-|---|---|---|---|
-| AC-01 | The system shall create/read one explicitly requested, labelled synthetic sample case for the current coordinator; reopening shall not silently duplicate it | 1–2 | T01 sample initialization + reload; case readback + screenshots |
-| AC-02 | The system shall save a valid 10–500-character trimmed note and atomically update its case count/last-note reference; both collections shall read back consistently | 3–5 | T02 happy path; UI, persisted values and reload evidence |
-| AC-03 | The system shall reject blank, fewer-than-10 and greater-than-500-character trimmed notes without changing either collection | 3–4 + error | T03 boundary/input cases; before/after data and validation screenshots |
-| AC-04 | The system shall deny reads/writes by an unauthenticated client and attempts against another user's case/notes | Preconditions + error | T04 no-auth and separate synthetic user; actual denial plus unchanged-data evidence |
-| AC-05 | The system shall enforce author/ownership, timestamps and allowed fields on the server, denying direct forged or one-sided writes even outside the UI | 4 + error | T05 direct client tampering and partial atomic-write cases; denial and readback |
-| AC-06 | The system shall show empty/loading/error/success states, disable Save during a pending save and retain unsaved text after a recoverable failure | 1–5 + error | T06 UI state evidence under controlled failure; no false-success output |
-| AC-07 | The system shall restore saved case/history after reload, display notes in a defined newest-first order and keep stored note text immutable | 2, 5–6 | T07 reload/order plus denied edit/delete; screenshots and persisted values |
+| AC    | Observable requirement                                                                                                                                              | UC steps              | Planned test and evidence                                                           |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------- |
+| AC-01 | The system shall create/read one explicitly requested, labelled synthetic sample case for the current coordinator; reopening shall not silently duplicate it        | 1–2                   | T01 sample initialization + reload; case readback + screenshots                     |
+| AC-02 | The system shall save a valid 10–500-character trimmed note and atomically update its case count/last-note reference; both collections shall read back consistently | 3–5                   | T02 happy path; UI, persisted values and reload evidence                            |
+| AC-03 | The system shall reject blank, fewer-than-10 and greater-than-500-character trimmed notes without changing either collection                                        | 3–4 + error           | T03 boundary/input cases; before/after data and validation screenshots              |
+| AC-04 | The system shall deny reads/writes by an unauthenticated client and attempts against another user's case/notes                                                      | Preconditions + error | T04 no-auth and separate synthetic user; actual denial plus unchanged-data evidence |
+| AC-05 | The system shall enforce author/ownership, timestamps and allowed fields on the server, denying direct forged or one-sided writes even outside the UI               | 4 + error             | T05 direct client tampering and partial atomic-write cases; denial and readback     |
+| AC-06 | The system shall show empty/loading/error/success states, disable Save during a pending save and retain unsaved text after a recoverable failure                    | 1–5 + error           | T06 UI state evidence under controlled failure; no false-success output             |
+| AC-07 | The system shall restore saved case/history after reload, display notes in a defined newest-first order and keep stored note text immutable                         | 2, 5–6                | T07 reload/order plus denied edit/delete; screenshots and persisted values          |
 
 These are planned tests, not executed results. Formal UX research, wireframes, exact rule/schema design and the polished template sections remain the next steps. Scope can be reduced before coding if the rule design or inherited dependency remediation makes these promises impractical.
-
 
 ## Final design clarifications
 
