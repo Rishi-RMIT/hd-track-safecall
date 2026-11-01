@@ -1,0 +1,223 @@
+{
+  "numTotalTestSuites": 7,
+  "numPassedTestSuites": 7,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 15,
+  "numPassedTests": 15,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793541437904,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["Firebase Admin runtime compatibility"],
+          "fullName": "Firebase Admin runtime compatibility loads Auth and resolves an RSA signing key without CommonJS-to-ESM require support",
+          "status": "passed",
+          "title": "loads Auth and resolves an RSA signing key without CommonJS-to-ESM require support",
+          "duration": 193.80787499999997,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793541439064,
+      "endTime": 1793541439257.8079,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/rishiverma/Documents/Capstone/HD Track/Individual/garage-boilerplate-basic/frontend/tests/unit/admin-runtime.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["notebook acceptance UI"],
+          "fullName": "notebook acceptance UI shows loading then explicit sample initialization and empty history (AC-01/06)",
+          "status": "passed",
+          "title": "shows loading then explicit sample initialization and empty history (AC-01/06)",
+          "duration": 110.88258300000007,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["notebook acceptance UI"],
+          "fullName": "notebook acceptance UI rejects invalid draft without calling persistence (AC-03)",
+          "status": "passed",
+          "title": "rejects invalid draft without calling persistence (AC-03)",
+          "duration": 24.259667000000036,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["notebook acceptance UI"],
+          "fullName": "notebook acceptance UI rejects invalid draft without calling persistence (AC-03)",
+          "status": "passed",
+          "title": "rejects invalid draft without calling persistence (AC-03)",
+          "duration": 15.82808399999999,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["notebook acceptance UI"],
+          "fullName": "notebook acceptance UI rejects invalid draft without calling persistence (AC-03)",
+          "status": "passed",
+          "title": "rejects invalid draft without calling persistence (AC-03)",
+          "duration": 13.560457999999926,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["notebook acceptance UI"],
+          "fullName": "notebook acceptance UI waits for acknowledgement, prevents double-submit and clears only after save (AC-02/06)",
+          "status": "passed",
+          "title": "waits for acknowledgement, prevents double-submit and clears only after save (AC-02/06)",
+          "duration": 20.65341599999988,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["notebook acceptance UI"],
+          "fullName": "notebook acceptance UI preserves failed draft, requires refresh, then reconciles committed ID (AC-06)",
+          "status": "passed",
+          "title": "preserves failed draft, requires refresh, then reconciles committed ID (AC-06)",
+          "duration": 37.939167,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["notebook acceptance UI"],
+          "fullName": "notebook acceptance UI shows read failure with a recovery control (AC-06)",
+          "status": "passed",
+          "title": "shows read failure with a recovery control (AC-06)",
+          "duration": 4.864958000000115,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["notebook acceptance UI"],
+          "fullName": "notebook acceptance UI accepts trimmed length boundaries (AC-03)",
+          "status": "passed",
+          "title": "accepts trimmed length boundaries (AC-03)",
+          "duration": 0.31083300000000236,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793541439130,
+      "endTime": 1793541439358.3108,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/rishiverma/Documents/Capstone/HD Track/Individual/garage-boilerplate-basic/frontend/tests/unit/notebook.test.tsx"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["cn"],
+          "fullName": "cn merges class names",
+          "status": "passed",
+          "title": "merges class names",
+          "duration": 4.693750000000136,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["cn"],
+          "fullName": "cn resolves tailwind conflicts (last wins)",
+          "status": "passed",
+          "title": "resolves tailwind conflicts (last wins)",
+          "duration": 0.35170799999991686,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["cn"],
+          "fullName": "cn handles conditional classes",
+          "status": "passed",
+          "title": "handles conditional classes",
+          "duration": 0.29912500000000364,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["truncate"],
+          "fullName": "truncate returns string unchanged when shorter than limit",
+          "status": "passed",
+          "title": "returns string unchanged when shorter than limit",
+          "duration": 0.306583000000046,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["truncate"],
+          "fullName": "truncate truncates and appends ellipsis when over limit",
+          "status": "passed",
+          "title": "truncates and appends ellipsis when over limit",
+          "duration": 0.10054199999990487,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": ["truncate"],
+          "fullName": "truncate returns full string when exactly at limit",
+          "status": "passed",
+          "title": "returns full string when exactly at limit",
+          "duration": 0.1326249999999618,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793541439079,
+      "endTime": 1793541439085.1326,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/rishiverma/Documents/Capstone/HD Track/Individual/garage-boilerplate-basic/frontend/tests/unit/lib/utils.test.ts"
+    }
+  ]
+}

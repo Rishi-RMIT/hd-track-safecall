@@ -14,3 +14,7 @@ Reviewed against the implemented notebook contract and executed tests on 1 Novem
 The recorded audit has zero high/critical and twelve moderate findings. Affected paths are qs in undeployed backend test tooling; ip-address in the undeployed backend rate limiter; minimatch/glob in lint/build and Firebase Admin's transitive filesystem maintenance chain. The notebook accepts no user-controlled glob patterns, filesystem paths or IP classification rules, and the backend Cloud Function is not deployed. No reachable notebook exploit was identified in this scoped review. This is not a claim that the dependencies are risk-free; the full audit remains available for maintenance.
 
 The high/critical gate remains enabled. Patched dependencies were checked with lint, typecheck, tests and production build. Do not suppress future failures to make deployment pass.
+
+## Production import boundary
+
+The first Vercel runtime failed while loading an authentication dependency's ESM import. The exact-version pnpm patch uses dynamic import within asynchronous signing-key work; it does not downgrade dependencies, relax verification or change permissions. A fresh-process regression test disables CommonJS-to-ESM require support, resolves a real generated public key and verifies a signature. See [RUNTIME-COMPATIBILITY.md](RUNTIME-COMPATIBILITY.md) for maintenance and reproduction.

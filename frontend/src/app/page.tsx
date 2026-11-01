@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Home',
-  description: 'Welcome to the app',
+  description: 'A personal notebook for synthetic SafeCall incident follow-up.',
 }
 
 export default function LandingPage() {
@@ -14,11 +14,12 @@ export default function LandingPage() {
           {process.env.NEXT_PUBLIC_APP_NAME ?? 'App'}
         </h1>
         <p className="max-w-md text-lg text-zinc-600 dark:text-zinc-400">
-          Your app description goes here. Edit{' '}
-          <code className="rounded bg-zinc-100 px-1 py-0.5 font-mono text-sm dark:bg-zinc-800">
-            src/app/page.tsx
-          </code>{' '}
-          to get started.
+          Keep your checks and next steps beside a synthetic SafeCall pendant case. Sign in with a
+          verified account to open your personal follow-up notebook.
+        </p>
+        <p className="mx-auto max-w-md text-sm text-zinc-500">
+          Demonstration only. No live pendant data or emergency action is performed. Do not enter
+          personal or confidential information.
         </p>
       </div>
       <div className="flex gap-4">
