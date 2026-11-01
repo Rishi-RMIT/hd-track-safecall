@@ -38,11 +38,11 @@ flowchart TB
 
 Three paths to the data, each with its own guard:
 
-| Path | Used for | Guarded by |
-|------|----------|-----------|
-| Browser → Firestore (client SDK) | Real-time subscriptions in Client Components | **Firestore security rules** |
-| Browser → Server Component / Server Action | SSR pages, mutations | **`requireAuth()`** (verifies session cookie) |
-| Browser → Express API | Business logic endpoints, heavy operations | **auth middleware** (verifies ID token) |
+| Path                                       | Used for                                     | Guarded by                                    |
+| ------------------------------------------ | -------------------------------------------- | --------------------------------------------- |
+| Browser → Firestore (client SDK)           | Real-time subscriptions in Client Components | **Firestore security rules**                  |
+| Browser → Server Component / Server Action | SSR pages, mutations                         | **`requireAuth()`** (verifies session cookie) |
+| Browser → Express API                      | Business logic endpoints, heavy operations   | **auth middleware** (verifies ID token)       |
 
 ## Authentication Flow
 
@@ -76,22 +76,26 @@ sequenceDiagram
 ## Request Patterns
 
 ### Server-rendered page (Server Component)
+
 1. Browser requests `/dashboard`
 2. `proxy.ts` checks the `__session` cookie → redirects to `/auth/signin` if absent
 3. Server Component calls `requireAuth()`, then fetches Firestore data via the Admin SDK
 4. HTML is streamed to the browser
 
 ### Client-side real-time data
+
 1. Client Component mounts
 2. `useCollection()` hook subscribes to Firestore via `onSnapshot`
 3. UI updates live as data changes — Firestore security rules enforce access
 
 ### Mutation (Server Action)
+
 1. Client Component calls a Server Action
 2. Action calls `requireAuth()`, validates input with Zod, writes via the Admin SDK
 3. Returns `ActionResult<T>` — `{ success, error?, data? }`
 
 ### API call (Cloud Functions)
+
 1. Client obtains a Firebase ID token: `user.getIdToken()`
 2. Client sends `Authorization: Bearer {token}` to `/api/...`
 3. Auth middleware verifies the token and attaches `req.user`
@@ -134,3 +138,7 @@ The "fat-lambda" pattern keeps local development identical to production (just r
 
 **Why a flat backend instead of layered "clean architecture"?**
 At this size, layers add indirection without payoff. The two properties that matter — swappable auth for tests and a single Firebase entry point — are kept via one injected function (`verifyToken`) and one module (`lib/firebase.ts`), both enforced by tests rather than folder structure.
+
+## Individual SafeCall notebook
+
+See `hd-track/design/architecture.png` and `FIRESTORE-SCHEMA.md` for the implemented extension. Protected Next.js layout verifies the session cookie. The browser uses Firebase Auth and the modular Firestore SDK for case reads, owner-filtered note reads and atomic note+case transactions. Rules enforce the complete feature contract on Spark. Vercel SSR only creates/checks Auth sessions; it does not write feature data. No Functions/Storage/billing are used. Account configuration and successful deployment status are tracked separately in `hd-track/DEPLOYMENT-SETUP.md`.

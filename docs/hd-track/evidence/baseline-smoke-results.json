@@ -1,0 +1,67 @@
+{
+  "timestamp": "2026-11-01T10:57:17.668Z",
+  "environment": "isolated real Firebase Spark project + local Next server",
+  "projectId": "hd-track-safecall",
+  "results": [
+    {
+      "name": "admin-auth-access",
+      "status": "PASS",
+      "detail": {
+        "synthetic": true,
+        "emailVerified": true
+      }
+    },
+    {
+      "name": "email-password-sign-in",
+      "status": "PASS",
+      "detail": {
+        "verified": true
+      }
+    },
+    {
+      "name": "profile-write-read",
+      "status": "PASS",
+      "detail": {
+        "persisted": true,
+        "collection": "users"
+      }
+    },
+    {
+      "name": "session-cookie-exchange",
+      "status": "PASS",
+      "detail": {
+        "http": 200,
+        "httpOnly": true
+      }
+    },
+    {
+      "name": "protected-dashboard-with-session",
+      "status": "PASS",
+      "detail": {
+        "http": 200
+      }
+    },
+    {
+      "name": "protected-dashboard-without-session",
+      "status": "PASS",
+      "detail": {
+        "http": 307,
+        "redirectToSignIn": true
+      }
+    },
+    {
+      "name": "session-missing-token",
+      "status": "PASS",
+      "detail": {
+        "http": 400
+      }
+    },
+    {
+      "name": "unauthenticated-firestore-denied",
+      "status": "PASS",
+      "detail": {
+        "denied": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "timestamp": "2026-11-01T11:54:09.181Z",
+  "project": "hd-track-safecall",
+  "environment": "Real Firebase Spark; client SDK writes under deployed rules; synthetic actors",
+  "rulesSourceSha256": "f7c8788786361bf34535a10e09babf0c531efe7aa4bff5697a038e6c47f6cc25",
+  "results": [
+    {
+      "id": "T01",
+      "ac": ["AC-01"],
+      "description": "Create/read case twice without duplicate or reset",
+      "result": "PASS",
+      "details": {
+        "caseExists": true,
+        "noteCount": 0
+      }
+    },
+    {
+      "id": "T02",
+      "ac": ["AC-02", "AC-07"],
+      "description": "Atomic note + case summary, independent server readback",
+      "result": "PASS",
+      "details": {
+        "count": 1,
+        "lastNoteMatches": true,
+        "matchingServerTimes": true,
+        "persistedText": "Checked maintenance window; review again at 17:00."
+      }
+    },
+    {
+      "id": "T03",
+      "ac": ["AC-03", "AC-05"],
+      "description": "Server rejects blank, 9, 501 and untrimmed notes with no partial writes",
+      "result": "PASS",
+      "details": {
+        "rejected": 4,
+        "summaryUnchanged": true,
+        "noPartialNotes": true
+      }
+    },
+    {
+      "id": "T04",
+      "ac": ["AC-04"],
+      "description": "Guest, unverified and other-owner access denied",
+      "result": "PASS",
+      "details": {
+        "denials": 7,
+        "originalCount": 1
+      }
+    },
+    {
+      "id": "T05",
+      "ac": ["AC-05"],
+      "description": "Direct forgery and one-sided writes denied atomically",
+      "result": "PASS",
+      "details": {
+        "denials": 6,
+        "countUnchanged": true
+      }
+    },
+    {
+      "id": "T07",
+      "ac": ["AC-07"],
+      "description": "Notes are immutable; owner-filtered server history persists",
+      "result": "PASS",
+      "details": {
+        "editDeleteDenials": 3,
+        "persistedNotes": 1
+      }
+    },
+    {
+      "id": "T08",
+      "ac": ["AC-02", "AC-06", "AC-07"],
+      "description": "Concurrent conflict has no partial write; refresh/retry and same-ID retry recover safely",
+      "result": "PASS",
+      "details": {
+        "concurrentAcknowledged": 1,
+        "recoverableConflicts": 1,
+        "addedAfterRecovery": 2,
+        "retryAdded": 0,
+        "countMatchesHistory": true
+      }
+    },
+    {
+      "id": "T09",
+      "ac": ["AC-03"],
+      "description": "Server accepts exact 10 and 500-character boundaries",
+      "result": "PASS",
+      "details": {
+        "acceptedLengths": [10, 500]
+      }
+    }
+  ]
+}

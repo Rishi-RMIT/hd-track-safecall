@@ -19,7 +19,7 @@ export async function getServerSession() {
 
   try {
     const decoded = await adminAuth.verifySessionCookie(sessionCookie, true)
-    return decoded
+    return decoded.email_verified ? decoded : null
   } catch {
     return null
   }

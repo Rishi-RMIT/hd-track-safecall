@@ -22,7 +22,8 @@
     "prepare": "lefthook install"
   },
   "devDependencies": {
+    "google-auth-library": "^11.3.2",
     "lefthook": "^1.11.13",
-    "next": "16.2.12"
+    "next": "16.4.3"
   }
 }

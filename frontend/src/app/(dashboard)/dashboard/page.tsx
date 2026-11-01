@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { getServerSession } from '@/actions/auth.actions'
-import { adminDb } from '@/lib/firebase/admin'
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -8,12 +7,7 @@ export const metadata: Metadata = {
 
 export default async function DashboardPage() {
   const session = await getServerSession()
-  const profileSnap = session ? await adminDb.collection('users').doc(session.uid).get() : null
-
-  const displayName = profileSnap?.exists
-    ? (profileSnap.data()?.displayName as string | null)
-    : null
-  const greetingName = displayName ?? session?.email ?? null
+  const greetingName = session?.name ?? session?.email ?? null
 
   return (
     <div className="space-y-6">
@@ -24,17 +18,15 @@ export default async function DashboardPage() {
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {(['Metric One', 'Metric Two', 'Metric Three'] as const).map((title) => (
-          <div
-            key={title}
-            className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
-          >
-            <p className="text-sm font-medium text-zinc-500">{title}</p>
-            <p className="mt-2 text-3xl font-bold">—</p>
-          </div>
-        ))}
-      </div>
+      <a
+        href="/notebook"
+        className="block rounded-xl border border-zinc-200 p-6 hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+      >
+        <h2 className="text-lg font-semibold">Incident follow-up notebook</h2>
+        <p className="mt-2 text-sm text-zinc-500">
+          Open your synthetic case, record checks and recover saved follow-up history.
+        </p>
+      </a>
     </div>
   )
 }

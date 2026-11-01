@@ -17,6 +17,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing token' }, { status: 400 })
     }
 
+    const decoded = await adminAuth.verifyIdToken(token)
+    if (!decoded.email_verified) {
+      return NextResponse.json({ error: 'Verified sign-in required' }, { status: 401 })
+    }
+
     // Verify the ID token and create a session cookie
     const sessionCookie = await adminAuth.createSessionCookie(token, {
       expiresIn: SESSION_DURATION_MS,
@@ -32,8 +37,7 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error('Session creation failed:', error)
+  } catch {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 }

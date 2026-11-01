@@ -57,3 +57,7 @@ docs/BOILERPLATE-BENCHMARK.md
 
 # Internal QA notes — not for the public repo
 docs/REPLICATION-LOG.md
+
+# Short-lived federated deployment credentials and local private test outputs
+gha-creds-*.json
+.secrets/

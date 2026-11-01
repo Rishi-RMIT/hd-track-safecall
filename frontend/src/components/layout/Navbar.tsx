@@ -20,6 +20,9 @@ export function Navbar() {
       <div className="text-sm font-semibold lg:hidden">
         {process.env.NEXT_PUBLIC_APP_NAME ?? 'App'}
       </div>
+      <Link href="/notebook" className="ml-4 text-sm font-medium hover:underline">
+        Notebook
+      </Link>
       <div className="flex-1" />
       <div className="flex items-center gap-3">
         {user && <span className="hidden text-sm text-zinc-500 sm:block">{user.email}</span>}

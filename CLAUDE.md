@@ -8,6 +8,8 @@ Client projects that fork this repo should update this file with their own proje
 ## Project Overview
 
 **Type:** Streamlined boilerplate for student capstone projects.
+**Client extension:** SafeCall incident follow-up notebook, an individual Telstra-inspired prototype on Firebase Spark. Feature code is `frontend/src/features/notebook/`; exact spec, tests and deployment notes are in `docs/hd-track/`. The team checkout is separate and must not be changed.
+
 **Purpose:** Zero-friction foundation for Next.js + Firebase web applications. No Docker, no local emulator, no paid Firebase plan required — `pnpm install` plus a free Firebase project (Spark plan) is enough to run the app.
 
 New to the repo? Read `docs/GUIDE.md` — it walks through building a feature end-to-end.
@@ -61,12 +63,12 @@ Everything a feature build needs already exists below. **Do not survey the codeb
 | `frontend/src/actions/auth.actions.ts` | `requireAuth()` (redirects if unauthed, returns session with `.uid`), `getServerSession()`, `serverSignOut()` | First line of every Server Action / protected page |
 | `frontend/src/lib/firebase/admin.ts` | `adminAuth`, `adminDb` (lazy, `server-only`) | All server-side Firebase |
 | `frontend/src/lib/firebase/client.ts` | `getClientApp/Auth/Db()` | Browser SDK (Client Components only) |
-| `frontend/src/lib/firebase/firestore.ts` | `getUsersCollection()`, `userDoc(uid)` — add new collections here as `get{X}Collection()` functions (`typedCollection` is module-private) | Typed collection access |
+| `frontend/src/lib/firebase/firestore.ts` | `getUsersCollection()`, `userDoc(uid)`, `getFollowUpCasesCollection()`, `getFollowUpNotesCollection()` — add new collections here as `get{X}Collection()` functions (`typedCollection` is module-private) | Typed collection access |
 | `frontend/src/lib/firebase/auth.ts` | `signInWithEmail`, `signUpWithEmail`, `signInWithGoogle`, `signOut`, `resetPassword`, `getIdToken` | Client sign-in flows |
 | `frontend/src/hooks/useFirestore.ts` | `useCollection(ref, ...constraints)` → `{ data, loading, error }` (onSnapshot) | Realtime lists in Client Components |
 | `frontend/src/hooks/useAuth.ts` | `useAuth()` → `{ user, profile, ... }` (AuthContext) | Current user in Client Components |
 | `frontend/src/types/index.ts` | `ActionResult<T>` `{ success, error?, data? }` + re-exports of `types/auth.ts`, `types/firestore.ts` | Return type of every Server Action |
-| `frontend/src/types/firestore.ts` | `UserProfile` — add new collection interfaces here (always with `_schemaVersion: 1`) | Collection types |
+| `frontend/src/types/firestore.ts` | `UserProfile`, `FollowUpCase`, `FollowUpNote` — add new collection interfaces here (always with `_schemaVersion: 1`) | Collection types |
 | `frontend/src/lib/validations/` | `loginSchema`, `signupSchema`, `registerSchema`, `resetPasswordSchema` (`auth.ts`) · `idSchema`, `paginationSchema` (`common.ts`) | Zod schemas — add feature schemas here or in the feature folder |
 | `frontend/src/lib/utils.ts` | `cn()`, `formatDate`, `formatDatetime`, `truncate` | Class merging, formatting |
 | `frontend/src/components/layout/` | `DashboardShell`, `Sidebar` (navItems array — add links here), `Navbar`, `PageHeader` | App shell |

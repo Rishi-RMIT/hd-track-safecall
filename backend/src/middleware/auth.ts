@@ -36,7 +36,7 @@ export function createAuthMiddleware(verifyToken: VerifyToken) {
   return async function authMiddleware(
     req: Request,
     _res: Response,
-    next: NextFunction,
+    next: NextFunction
   ): Promise<void> {
     const authHeader = req.headers.authorization
     if (!authHeader?.startsWith('Bearer ')) {
