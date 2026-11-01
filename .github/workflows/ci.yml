@@ -10,6 +10,7 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 jobs:
   quality:
+    if: github.repository == 'Rishi-RMIT/hd-track-safecall'
     name: Quality checks
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -33,7 +34,7 @@ jobs:
   deploy-rules:
     name: Deploy Firestore rules
     needs: quality
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.repository == 'Rishi-RMIT/hd-track-safecall' && github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
