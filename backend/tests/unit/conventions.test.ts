@@ -28,13 +28,13 @@ describe('Backend conventions', () => {
     const violations = allFiles
       .filter((file) => !file.endsWith(path.join('lib', 'firebase.ts')))
       .filter((file) =>
-        /import\s+(?!type\b)[^;]*from\s+['"]firebase-admin/.test(fs.readFileSync(file, 'utf-8')),
+        /import\s+(?!type\b)[^;]*from\s+['"]firebase-admin/.test(fs.readFileSync(file, 'utf-8'))
       )
       .map((file) => path.relative(SRC, file))
 
     expect(
       violations,
-      `Import { adminDb, adminAuth } from lib/firebase instead: ${violations.join(', ')}`,
+      `Import { adminDb, adminAuth } from lib/firebase instead: ${violations.join(', ')}`
     ).toEqual([])
   })
 

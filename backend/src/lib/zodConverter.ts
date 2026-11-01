@@ -19,7 +19,7 @@ import type { ZodType } from 'zod'
 export function createZodConverter<T extends { _schemaVersion: number }>(
   schema: ZodType<T>,
   currentVersion: number,
-  migrate?: (data: Record<string, unknown>, fromVersion: number) => Record<string, unknown>,
+  migrate?: (data: Record<string, unknown>, fromVersion: number) => Record<string, unknown>
 ): FirestoreDataConverter<T> {
   return {
     toFirestore(data: T): DocumentData {
@@ -30,13 +30,12 @@ export function createZodConverter<T extends { _schemaVersion: number }>(
       const raw = snapshot.data() as Record<string, unknown>
       const storedVersion = typeof raw['_schemaVersion'] === 'number' ? raw['_schemaVersion'] : 0
 
-      const migrated =
-        storedVersion < currentVersion && migrate ? migrate(raw, storedVersion) : raw
+      const migrated = storedVersion < currentVersion && migrate ? migrate(raw, storedVersion) : raw
 
       const result = schema.safeParse(migrated)
       if (!result.success) {
         throw new Error(
-          `Firestore schema validation failed at ${snapshot.ref.path}: ${result.error.message}`,
+          `Firestore schema validation failed at ${snapshot.ref.path}: ${result.error.message}`
         )
       }
       return result.data

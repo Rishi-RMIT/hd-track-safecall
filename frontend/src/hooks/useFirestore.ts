@@ -32,9 +32,7 @@ export function useCollection<T extends DocumentData>(
 
   useEffect(() => {
     const q: Query<T> =
-      queryConstraints.length > 0
-        ? query(collectionRef, ...queryConstraints)
-        : query(collectionRef)
+      queryConstraints.length > 0 ? query(collectionRef, ...queryConstraints) : query(collectionRef)
 
     const unsubscribe = onSnapshot(
       q,

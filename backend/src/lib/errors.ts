@@ -37,7 +37,11 @@ export class HttpError extends Error {
   }
 
   static notFound(resource: string, id?: string): HttpError {
-    return new HttpError(404, 'Not Found', id ? `${resource} '${id}' not found` : `${resource} not found`)
+    return new HttpError(
+      404,
+      'Not Found',
+      id ? `${resource} '${id}' not found` : `${resource} not found`
+    )
   }
 
   static conflict(detail: string): HttpError {
