@@ -1,0 +1,28 @@
+{
+  "mode": "Patched production build, NODE_OPTIONS=--no-experimental-require-module, no credentials transmitted",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "location": null,
+      "placeholderPresent": false
+    },
+    {
+      "path": "/notebook",
+      "status": 307,
+      "location": "/auth/signin",
+      "placeholderPresent": false
+    },
+    {
+      "path": "/api/auth/session",
+      "status": 405,
+      "location": null,
+      "placeholderPresent": false
+    },
+    {
+      "path": "/api/auth/session",
+      "method": "POST",
+      "status": 400
+    }
+  ]
+}

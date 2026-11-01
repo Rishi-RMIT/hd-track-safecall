@@ -30,3 +30,7 @@ allowBuilds:
   protobufjs: true
   sharp: true
   unrs-resolver: true
+
+# Load jose through ESM import on restricted Node runtimes.
+patchedDependencies:
+  'jwks-rsa@4.1.0': patches/jwks-rsa@4.1.0.patch
