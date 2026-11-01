@@ -1,0 +1,7 @@
+{
+  "timestamp": "2026-11-01T12:23:50.754Z",
+  "identity": "hd-session-server",
+  "sessionCreateAndRevocationCheck": "PASS",
+  "featureDataReadDenied": true,
+  "environment": "local verification of dedicated Vercel session credential"
+}
