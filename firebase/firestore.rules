@@ -56,7 +56,73 @@ service cloud.firestore {
       allow delete: if false; // soft-delete only — set deletedAt field instead
     }
 
-    // Add new collection rules above this comment using the /firebase-collection skill.
+    function coordinator() {
+      return isAuthenticated() && request.auth.token.email_verified == true;
+    }
+
+    // One deterministic synthetic case per verified account. Context is immutable.
+    match /followUpCases/{caseId} {
+      allow read: if coordinator() && caseId == request.auth.uid;
+      allow create: if coordinator() && caseId == request.auth.uid
+        && request.resource.data.keys().hasAll(['ownerUid', 'deviceLabel', 'context', 'noteCount', 'lastNoteId', 'createdAt', 'updatedAt', '_schemaVersion'])
+        && request.resource.data.keys().hasOnly(['ownerUid', 'deviceLabel', 'context', 'noteCount', 'lastNoteId', 'createdAt', 'updatedAt', '_schemaVersion'])
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.deviceLabel == 'SC-DEMO-01'
+        && request.resource.data.context == 'Synthetic pendant: no heartbeat during a simulated maintenance window. Record checks and the next follow-up; no operational action is performed.'
+        && request.resource.data.noteCount == 0
+        && request.resource.data.lastNoteId == null
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data._schemaVersion == 1;
+      allow update: if coordinator() && caseId == request.auth.uid
+        && resource.data.ownerUid == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['noteCount', 'lastNoteId', 'updatedAt'])
+        && request.resource.data.noteCount is int
+        && request.resource.data.noteCount == resource.data.noteCount + 1
+        && request.resource.data.lastNoteId is string
+        && request.resource.data.lastNoteId.size() == 20
+        && request.resource.data.updatedAt == request.time
+        && newMatchingNote(caseId, request.resource.data.lastNoteId);
+      allow delete: if false;
+    }
+
+    function newMatchingNote(caseId, noteId) {
+      let notePath = /databases/$(database)/documents/followUpNotes/$(noteId);
+      let note = getAfter(notePath).data;
+      return !exists(notePath)
+        && note.ownerUid == request.auth.uid
+        && note.caseId == caseId
+        && note.createdAt == request.time;
+    }
+
+    match /followUpNotes/{noteId} {
+      allow get: if coordinator() && (resource == null || resource.data.ownerUid == request.auth.uid);
+      allow list: if coordinator() && resource.data.ownerUid == request.auth.uid;
+      allow create: if coordinator() && noteId.size() == 20
+        && request.resource.data.keys().hasAll(['ownerUid', 'caseId', 'text', 'createdAt', '_schemaVersion'])
+        && request.resource.data.keys().hasOnly(['ownerUid', 'caseId', 'text', 'createdAt', '_schemaVersion'])
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.caseId == request.auth.uid
+        && request.resource.data.text is string
+        && request.resource.data.text.size() >= 10
+        && request.resource.data.text.size() <= 500
+        && request.resource.data.text.matches('^[^\\s]([\\s\\S]*[^\\s])$')
+        && request.resource.data.createdAt == request.time
+        && request.resource.data._schemaVersion == 1
+        && matchingCaseUpdate(noteId);
+      allow update, delete: if false;
+    }
+
+    function matchingCaseUpdate(noteId) {
+      let casePath = /databases/$(database)/documents/followUpCases/$(request.auth.uid);
+      let before = get(casePath).data;
+      let after = getAfter(casePath).data;
+      return before.ownerUid == request.auth.uid
+        && after.ownerUid == request.auth.uid
+        && after.noteCount == before.noteCount + 1
+        && after.lastNoteId == noteId
+        && after.updatedAt == request.time;
+    }
 
     // ── Default deny ───────────────────────────────────────────────────────
     match /{document=**} {
