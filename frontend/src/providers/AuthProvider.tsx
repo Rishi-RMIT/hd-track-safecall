@@ -11,6 +11,7 @@ import {
   signOut as fbSignOut,
   getIdToken,
 } from '@/lib/firebase/auth'
+import { toast } from 'sonner'
 import type { AuthContextValue } from '@/types/auth'
 import type { UserProfile } from '@/types/firestore'
 
@@ -65,11 +66,12 @@ async function syncUserProfile(user: User): Promise<UserProfile> {
 async function setSessionCookie(): Promise<void> {
   const token = await getIdToken()
   if (!token) return
-  await fetch('/api/auth/session', {
+  const response = await fetch('/api/auth/session', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token }),
   })
+  if (!response.ok) throw new Error('Session exchange failed')
 }
 
 async function clearSessionCookie(): Promise<void> {
@@ -83,25 +85,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(getClientAuth(), async (firebaseUser) => {
-      if (firebaseUser) {
-        // Treat unverified users as unauthenticated so they cannot access
-        // protected routes or receive a session cookie before verifying.
-        if (!firebaseUser.emailVerified) {
+      try {
+        if (firebaseUser) {
+          // Treat unverified users as unauthenticated so they cannot access
+          // protected routes or receive a session cookie before verifying.
+          if (!firebaseUser.emailVerified) {
+            setUser(null)
+            setProfile(null)
+            setLoading(false)
+            return
+          }
+          setUser(firebaseUser)
+          const userProfile = await syncUserProfile(firebaseUser)
+          setProfile(userProfile)
+          await setSessionCookie()
+        } else {
           setUser(null)
           setProfile(null)
-          setLoading(false)
-          return
+          await clearSessionCookie()
         }
-        setUser(firebaseUser)
-        const userProfile = await syncUserProfile(firebaseUser)
-        setProfile(userProfile)
-        await setSessionCookie()
-      } else {
+      } catch {
         setUser(null)
         setProfile(null)
-        await clearSessionCookie()
+        toast.error('Could not restore your session. Please sign in again.')
+      } finally {
+        setLoading(false)
       }
-      setLoading(false)
     })
 
     return () => unsubscribe()

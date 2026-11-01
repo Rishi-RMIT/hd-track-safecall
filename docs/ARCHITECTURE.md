@@ -134,3 +134,8 @@ The "fat-lambda" pattern keeps local development identical to production (just r
 
 **Why a flat backend instead of layered "clean architecture"?**
 At this size, layers add indirection without payoff. The two properties that matter — swappable auth for tests and a single Firebase entry point — are kept via one injected function (`verifyToken`) and one module (`lib/firebase.ts`), both enforced by tests rather than folder structure.
+
+
+## Individual SafeCall notebook
+
+See `hd-track/design/architecture.png` and `FIRESTORE-SCHEMA.md` for the implemented extension. Protected Next.js layout verifies the session cookie. The browser uses Firebase Auth and the modular Firestore SDK for case reads, owner-filtered note reads and atomic note+case transactions. Rules enforce the complete feature contract on Spark. Vercel SSR only creates/checks Auth sessions; it does not write feature data. No Functions/Storage/billing are used. Account configuration and successful deployment status are tracked separately in `hd-track/DEPLOYMENT-SETUP.md`.

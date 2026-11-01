@@ -1,3 +1,19 @@
+# SafeCall incident follow-up notebook
+
+Individual extension of RMIT Garage's Next.js/Firebase boilerplate. The original notices and setup guide are retained below. This prototype lets a verified coordinator create one synthetic pendant case, save append-only investigation notes, and recover their timestamped history. It adds personal context without changing the team console's escalation lifecycle.
+
+- Open `/auth/signup`, use an email you control, verify the email, then sign in. From Dashboard choose **Incident follow-up notebook** (or `/notebook`). No shared demo password is published.
+- Choose **Create sample case**, enter 10–500 trimmed characters, **Save follow-up**, then reload or **Refresh history**. Use synthetic text only. No emergency action occurs.
+- One case per account; reopening never silently resets it. Notes cannot be edited/deleted. To demonstrate an empty notebook again, use a separate verified test account; do not reset another account's data.
+- Two collections: `followUpCases`, `followUpNotes`; both are read/written with substantial atomic consistency/ownership rules. No Cloud Functions or Storage are required; Firebase stays on Spark.
+- Local setup: Node 22, pnpm 10.34.9, root ignored `.env` via `.env.example`, `pnpm install --frozen-lockfile`, `pnpm run dev`. `pnpm run env:sync` copies local environment values to packages. Never commit or upload the broad local Admin key.
+- Checks: `pnpm run lint`, `pnpm run typecheck`, `pnpm -r format:check`, `pnpm run test:all`, `pnpm audit --audit-level=high`, `pnpm run build`. Real synthetic Spark tests: `node frontend/scripts/test-notebook-live.mjs` with approved local test credentials.
+- [Specification](docs/hd-track/SPECIFICATION.md), [UX framing](docs/hd-track/design/UX-PROBLEM-FRAMING.md), [data model](docs/FIRESTORE-SCHEMA.md), [acceptance tests](docs/hd-track/TEST-PLAN.md), [deployment setup](docs/hd-track/DEPLOYMENT-SETUP.md).
+
+Limitations: personal synthetic demo, no shared handover or emergency dispatch; unpaginated history; concurrent tabs can require refresh/retry; separately initiated identical notes are allowed. Browser drafts are not persisted across navigation. Dependencies were patched to pass the high/critical security gate; lower-severity findings are recorded in the audit evidence.
+
+---
+
 # Garage Boilerplate
 
 > Streamlined Next.js + Firebase monorepo for student capstone projects — batteries included, beginner friendly, free-tier only.
@@ -129,24 +145,9 @@ pnpm run validate         # Check for unreplaced template placeholders
 
 Security is enforced in independent layers — Claude Code guard hooks, HTTP hardening (helmet/CORS/rate limits), token + session-cookie auth, Zod input validation, default-deny Firestore rules, and CI scanning (`pnpm audit`). See [docs/SECURITY.md](docs/SECURITY.md).
 
-### Known `pnpm audit` findings (manual fix)
+### Dependency audit evidence
 
-
-`pnpm audit` currently flags two high-severity CVEs — both transitive, dev/build-time only, not runtime-reachable:
-
-| Package | Issue | Pulled in by |
-|---------|-------|--------------|
-| `js-yaml` | CVE-2026-59870 — quadratic CPU DoS on `!!omap` resolution | eslint's dependency chain (lint-time only) |
-| `nanoid` | Infinite loop when a custom generator's `size` is 0 | postcss, used by Tailwind/Next/Vitest builds (build-time only) |
-
-To patch: add these two lines under `overrides:` in `pnpm-workspace.yaml`, then run `pnpm install`:
-
-```yaml
-  js-yaml: '^4.3.1'
-  nanoid: '^3.3.17'
-```
-
-Confirm with `pnpm audit` — should show 0 high/critical findings.
+The final local audit reports zero high/critical findings and 12 moderate findings. The complete machine-readable record is `docs/hd-track/evidence/feature-audit.json`; the high/critical gate remains enabled. Patched direct dependencies and narrow transitive overrides are locked in `pnpm-lock.yaml`. This replaces the inherited two-advisory note; it does not claim a clean audit at every severity.
 
 ## Git Workflow
 

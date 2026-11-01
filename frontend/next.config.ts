@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next'
+import path from 'node:path'
 
 const securityHeaders = [
   // Prevent MIME-type sniffing
@@ -12,6 +13,7 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
+  turbopack: { root: path.resolve(__dirname, '..') },
   async headers() {
     return [
       {

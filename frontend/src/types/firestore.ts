@@ -23,3 +23,22 @@ export interface UserProfile {
 }
 
 export type CreateUserProfileInput = Omit<UserProfile, 'createdAt' | 'updatedAt'>
+
+export interface FollowUpCase {
+  ownerUid: string
+  deviceLabel: string
+  context: string
+  noteCount: number
+  lastNoteId: string | null
+  createdAt: Timestamp
+  updatedAt: Timestamp
+  _schemaVersion: 1
+}
+
+export interface FollowUpNote {
+  ownerUid: string
+  caseId: string
+  text: string
+  createdAt: Timestamp
+  _schemaVersion: 1
+}
